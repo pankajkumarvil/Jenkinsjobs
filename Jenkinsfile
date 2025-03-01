@@ -54,13 +54,13 @@ pipeline {
                 }
             }
         }
-      stage('Install HTTPD on EC2') {
-         steps {
-           script {            // Run the Ansible playbook to install HTTPD on the EC2 instance using the public IP
-            bat 'wsl ansible-playbook -i httpd.yml'
-        }
-        }
-      }
+    //   stage('Install HTTPD on EC2') {
+    //      steps {
+    //        script {            // Run the Ansible playbook to install HTTPD on the EC2 instance using the public IP
+    //         bat 'wsl ansible-playbook -i httpd.yml'
+    //     }
+    //     }
+    //   }
 
 
 
