@@ -90,7 +90,7 @@ stage('Install HTTPD on EC2') {
 
             // Run the Ansible playbook to install HTTPD on the EC2 instance using the public IP
             bat """
-                wsl ansible-playbook -i '${ec2PublicIp}' -u ec2-user --private-key '${privateKeyPath}' '${playbookPath}'
+                wsl ansible-playbook -i ''${ec2PublicIp}' -u ec2-user --private-key '${privateKeyPath}' '${playbookPath}'
             """
         }
     }
