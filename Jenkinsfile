@@ -83,7 +83,7 @@ stage('Install HTTPD on EC2') {
             def privateKeyPath = "/mnt/c/Users/Lenovo/Downloads/linuxkey.pem"  // WSL path for private key
 
             // Define the path to the Ansible playbook
-            def playbookPath = "/mnt/c/ProgramData/Jenkins/.jenkins/workspace/awsinfradeployment/httpd.yml"  // WSL path for playbook
+            def playbookPath = "C:\Users\Lenovo\Desktop\Jenkinsjobs\httpd.yml"  // WSL path for playbook
 
             // Define EC2 public IP
             def ec2PublicIp = "${env.EC2_PUBLIC_IP}"
