@@ -1,0 +1,47 @@
+---
+- name: Installing httpd server on RedHat/CentOS machine
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Installing Apache HTTP server (httpd) on newly created EC2
+      yum:
+        name: httpd
+        state: present
+
+    - name: Ensure httpd is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Create a custom index.html file with styled content
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <html>
+            <head>
+              <style>
+                body {
+                  font-family: Arial, sans-serif;
+                  text-align: center;
+                }
+                h1 {
+                  font-size: 48px;
+                  font-weight: bold;
+                  color: #ff6347; /* Tomato color */
+                  text-shadow: 0 0 10px #ff6347, 0 0 20px #ff6347, 0 0 30px #ff6347; /* Glowing effect */
+                }
+              </style>
+            </head>
+            <body>
+              <h1>Congratulation !!</h1>
+            </body>
+          </html>
+
+    - name: Ensure the index.html is accessible by the web server
+      file:
+        path: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
