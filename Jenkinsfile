@@ -54,47 +54,13 @@ pipeline {
                 }
             }
         }
-
-        // stage('Wait for EC2 Instance to Prepare') {
-        //     steps {
-        //         script {
-        //             // Ask for user input to decide whether to proceed with waiting
-        //             def proceed = input message: 'Do you want to wait for EC2 instance to prepare?', 
-        //                  parameters: [
-        //                  booleanParam(defaultValue: true, description: 'Wait for EC2?', name: 'ProceedWait')
-        //                             ]
-
-        //             if (proceed) {
-        //                 // If the user chooses 'Yes', wait for 2 minutes
-        //                 echo "Waiting for 2 minutes for the EC2 instance to prepare..."
-        //                 sleep(time: 2, unit: 'MINUTES')  // Sleep for 2 minutes
-        //             } else {
-        //                 echo "Skipping the wait for EC2 instance preparation."
-        //             }
-        //         }
-        //     }
-        // }
-
-
-stage('Install HTTPD on EC2') {
-    steps {
-        script {
-            // Define the path to your converted private key (.pem)
-            def privateKeyPath = "/mnt/c/Users/Lenovo/Downloads/linuxkey.pem"  // WSL path for private key
-
-            // Define the path to the Ansible playbook
-            def playbookPath = "C:\Users\Lenovo\Desktop\Jenkinsjobs\httpd.yml"  // WSL path for playbook
-
-            // Define EC2 public IP
-            def ec2PublicIp = "${env.EC2_PUBLIC_IP}"
-
-            // Run the Ansible playbook to install HTTPD on the EC2 instance using the public IP
-            bat """
-                wsl ansible-playbook -i ''${ec2PublicIp}' -u ec2-user --private-key '${privateKeyPath}' '${playbookPath}'
-            """
+      stage('Install HTTPD on EC2') {
+         steps {
+           script {            // Run the Ansible playbook to install HTTPD on the EC2 instance using the public IP
+            bat 'wsl ansible-playbook -i httpd.yml'
         }
-    }
-}
+        }
+      }
 
 
 
