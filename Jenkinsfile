@@ -6,22 +6,21 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         
-        // Update PATH to include the Terraform installation directory
-        PATH = "C:\\Users\\Lenovo\\Downloads\\terraform_1.10.5_windows_amd64;$PATH"
     }
 
     stages {
         stage('Terraform init') {
             steps {
                 // Execute terraform init with injected AWS credentials
-                bat 'terraform init'
+                sh "git init"
+                sh 'terraform init'
             }
         }
 
         stage('Terraform plan') {
             steps {
                 // Execute terraform plan with injected AWS credentials
-                bat 'terraform plan'
+                sh 'terraform plan'
             }
         }
 
@@ -37,7 +36,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 // Execute terraform apply with injected AWS credentials
-                bat 'terraform apply --auto-approve'
+                sh 'terraform apply --auto-approve'
             }
         }
 
@@ -76,7 +75,7 @@ pipeline {
         stage('Terraform Destroy') {
             steps {
                 // Execute terraform destroy with injected AWS credentials
-                bat 'terraform destroy --auto-approve'
+                sh 'terraform destroy --auto-approve'
             }
         }
     }
